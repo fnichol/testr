@@ -1,3 +1,3 @@
 # testr
 
-It does things.
+It does things. You can do those things too.

@@ -1,0 +1,6 @@
+image: progrium/busybox
+
+script:
+  - echo "HERE I AM"
+  - pwd
+  - cat README.md

@@ -1,4 +1,4 @@
-image: progrium/busybox
+image: ubuntu
 
 script:
   - echo "HERE I AM"

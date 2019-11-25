@@ -5,11 +5,6 @@ bump-version: ## Set a new version for the project. Set VERSION=x.y.z
 		echo "xxx Missing required value: VERSION" >&2; \
 		exit 1; \
 	fi
-	@echo "  - Updating: [README.md, install.sh, libsh.sh]"
-	current="$$(cat VERSION.txt | sed 's,\.,\\.,g')" \
-		&& sed -i.bak "s,$${current},$(VERSION),g" \
-			README.md install.sh libsh.sh \
-		&& rm -f README.md.bak install.sh.bak libsh.sh.bak
 	@echo "  - Setting version to '$(VERSION)' in VERSION.txt"
 	echo "$(VERSION)" > VERSION.txt
 	@echo "  - Preparing release commit"

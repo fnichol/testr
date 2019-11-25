@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+main() {
+  set -eu
+
+  version="@@version@@"
+  target="@@target@@"
+  system="$(uname -s | tr '[:upper:]' '[:lower:]')"
+  machine="$(uname -m | tr '[:upper:]' '[:lower:]')"
+  computed_target="${system}-${machine}"
+
+  echo "version=$version"
+  echo "target=$target"
+  echo "computed_target=$computed_target"
+  echo
+
+  if [ "$target" = "$computed_target" ]; then
+    echo "Running on expected target: $target, success"
+  else
+    echo "Computed target $computed_target does not match expected target $target"
+    exit 1
+  fi
+}
+
+main "$@"

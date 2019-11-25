@@ -1,17 +1,15 @@
-bump-version: ## Set a new version for the project. Set VERSION=x.y.z
+BUMP_MODE ?= minor
+
+bump-version: ## Set a new version for the project. (default: BUMP_MODE=minor)
 	@echo "--- $@"
-	@if [ -z "$(strip $(VERSION))" ]; then \
-		echo "xxx usage: make bump-version VERSION=1.2.3" >&2; \
-		echo "xxx Missing required value: VERSION" >&2; \
-		exit 1; \
-	fi
-	@echo "  - Setting version to '$(VERSION)' in VERSION.txt"
-	echo "$(VERSION)" > VERSION.txt
+	@echo "  - Bumping version $(BUMP_MODE)"
+	versio bump file $(BUMP_MODE)
 	@echo "  - Preparing release commit"
-	git add README.md VERSION.txt install.sh libsh.sh
-	git commit --signoff --message "[release] Update version to $(VERSION)"
+	git add VERSION.txt
+	git commit --signoff \
+		--message "[release] Update version to $$(cat VERSION.txt)"
 	@echo
-	@echo "To complete the release for $(VERSION), run: \`make tag\`"
+	@echo "To complete the release for $$(cat VERSION.txt), run: \`make tag\`"
 .PHONY: bump-version
 
 tag: ## Create a new release Git tag

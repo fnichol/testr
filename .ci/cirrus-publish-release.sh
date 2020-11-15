@@ -61,15 +61,21 @@ gh_create_release() {
 gh_create_version_release() {
   local repo="$1"
   local tag="$2"
-  local name="$3"
+
+  local prerelease
+  if echo "${tag#v}" | grep -q -E '^\d+\.\d+.\d+-.+'; then
+    prerelease=true
+  else
+    prerelease=false
+  fi
 
   gh_create_release \
     "$repo" \
     "$tag" \
-    "$name" \
-    "Release body for $name $tag" \
+    "$tag" \
+    "Release ${tag#v}" \
     true \
-    false
+    "$prerelease"
 }
 
 gh_release_upload_url_for_tag() {

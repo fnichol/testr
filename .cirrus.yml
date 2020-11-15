@@ -32,11 +32,12 @@ task:
   create_github_release_script: |
     . .ci/cirrus-publish-release.sh
 
+    set -x
+
     upload_url="$(
       gh_create_version_release \
         "$CIRRUS_REPO_FULL_NAME" \
-        "$CIRRUS_TAG" \
-        "$BIN ${CIRRUS_TAG#v}"
+        "$CIRRUS_TAG"
     )" || die "Failed to create release"
     echo "$upload_url" > /tmp/upload_url
   download_cirrus_artifacts_script: |

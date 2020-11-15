@@ -120,7 +120,7 @@ gh_rest_raw() {
 
 gh_upload() {
   local url="$1"
-  local artifact_file="$1"
+  local artifact_file="$2"
 
   need_cmd basename
 

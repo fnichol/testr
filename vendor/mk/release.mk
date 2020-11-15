@@ -7,7 +7,7 @@ bump-version: ## Set a new version for the project. (default: BUMP_MODE=minor)
 	@echo "  - Preparing release commit"
 	git add VERSION.txt
 	git commit --signoff \
-		--message "[release] Update version to $$(cat VERSION.txt)"
+		--message "release: testr $$(cat VERSION.txt)"
 	@echo
 	@echo "To complete the release for $$(cat VERSION.txt), run: \`make tag\`"
 .PHONY: bump-version
@@ -16,7 +16,7 @@ tag: ## Create a new release Git tag
 	@echo "--- $@"
 	@version="$$(cat VERSION.txt)" && tag="v$$version" \
 		&& git tag --annotate "$$tag" \
-			--message "Release version $$version" \
+			--message "release: testr $$version" \
 		&& echo "Release tag '$$tag' created." \
 		&& echo "To push: \`git push origin $$tag\`"
 .PHONY: tag

@@ -23,7 +23,7 @@ task:
   env:
     BIN: testr
     GITHUB_TOKEN: ENCRYPTED[7054327568cadd632ef0a293bead22ff3dc5912825d2484f434297b952191427c4b22d2f27c8dffca448a3da40947324]
-  only_if: $CIRRUS_BRANCH == 'master' && $CIRRUS_TAG != ''
+  only_if: $CIRRUS_TAG != ''
   depends_on:
     - build-testr-darwin-x86_64
     - build-testr-freebsd-x86_64

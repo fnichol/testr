@@ -1,6 +1,0 @@
-image: google/golang
-
-script:
-  - echo "HERE I AM"
-  - pwd
-  - cat README.md

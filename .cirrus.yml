@@ -32,6 +32,8 @@ task:
   create_github_release_script: |
     . .ci/cirrus-publish-release.sh
 
+    set -x
+
     upload_url="$(
       gh_create_version_release \
         "$CIRRUS_REPO_FULL_NAME" \

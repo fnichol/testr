@@ -49,6 +49,11 @@ gh_create_release() {
       prerelease="$prerelease"
   )"
 
+  echo "my payload:"
+  echo "==="
+  echo "$payload"
+  echo "==="
+
   local response
   if ! response="$(
     gh_rest POST "/repos/$repo/releases" --data "$payload"

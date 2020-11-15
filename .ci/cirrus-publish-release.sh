@@ -33,22 +33,14 @@ gh_create_release() {
   local draft="$5"
   local prerelease="$6"
 
-  need_cmd git
   need_cmd jo
   need_cmd jq
   need_cmd sed
-
-  local commit
-  if ! commit="$(git rev-parse "$tag")"; then
-    echo "!!! Failed to get SHA for tag $tag" >&2
-    return 1
-  fi
 
   local payload
   payload="$(
     jo \
       tag_name="$tag" \
-      target_commitish="$commit" \
       name="$name" \
       body="$body" \
       draft="$draft" \

@@ -38,8 +38,6 @@ build/testr-$(TARGET):
 			-e "s,@@target@@,$(TARGET),g" $@ \
 		&& rm -f $@.bak
 	chmod 755 $@
-	cd build && md5 $$(basename $@) > $$(basename $@).md5
-	cd build && shasum -a 256 $$(basename $@) > $$(basename $@).sha256
 
 build/testr.manifest.txt:
 	@echo "--- $@"

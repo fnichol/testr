@@ -47,8 +47,6 @@ gh_create_release() {
       prerelease="$prerelease"
   )"
 
-  echo "--- Creating a GitHub release for $tag"
-
   local response
   if ! response="$(
     gh_rest POST "/repos/$repo/releases" --data "$payload"

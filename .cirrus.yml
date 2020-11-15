@@ -28,7 +28,7 @@ task:
     - build-testr-darwin-x86_64
     - build-testr-freebsd-x86_64
     - build-testr-linux-x86_64
-  install_dependencies_script: apk add curl jo jq
+  install_dependencies_script: apk add curl git jo jq
   create_github_release_script: |
     . .ci/cirrus-publish-release.sh
 
@@ -38,7 +38,6 @@ task:
       gh_create_version_release \
         "$CIRRUS_REPO_FULL_NAME" \
         "$CIRRUS_TAG" \
-        "$CIRRUS_BASE_SHA" \
         "$BIN ${CIRRUS_TAG#v}"
     )" || die "Failed to create release"
     echo "$upload_url" > /tmp/upload_url

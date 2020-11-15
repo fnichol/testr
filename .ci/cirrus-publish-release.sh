@@ -28,15 +28,21 @@ ci_download() {
 gh_create_release() {
   local repo="$1"
   local tag="$2"
-  local commit="$3"
-  local name="$4"
-  local body="$5"
-  local draft="$6"
-  local prerelease="$7"
+  local name="$3"
+  local body="$4"
+  local draft="$5"
+  local prerelease="$6"
 
+  need_cmd git
   need_cmd jo
   need_cmd jq
   need_cmd sed
+
+  local commit
+  if ! commit="$(git rev-parse "$tag")"; then
+    echo "!!! Failed to get SHA for tag $tag" >&2
+    return 1
+  fi
 
   local payload
   payload="$(
@@ -48,11 +54,6 @@ gh_create_release() {
       draft="$draft" \
       prerelease="$prerelease"
   )"
-
-  echo "my payload:"
-  echo "==="
-  echo "$payload"
-  echo "==="
 
   local response
   if ! response="$(
@@ -68,13 +69,11 @@ gh_create_release() {
 gh_create_version_release() {
   local repo="$1"
   local tag="$2"
-  local commit="$3"
-  local name="$4"
+  local name="$3"
 
   gh_create_release \
     "$repo" \
     "$tag" \
-    "$commit" \
     "$name" \
     "Release body for $name $tag" \
     true \
